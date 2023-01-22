@@ -25,11 +25,14 @@ class CarsAPI:
             car = body.get('car')
             if car is None or len(car) < 2:
                 return {'message': f'User ID is missing, or is less than 2 characters'}, 210
+            id = body.get('id')
+            if id is None :
+                return {'message': f'User ID is missing, or is less than 2 characters'}, 210
             # look for password and dob
 
             ''' #1: Key code block, setup USER OBJECT '''
             uo = Cars(name=name, 
-                      car=car)
+                      car=car, id=id,)
             
             ''' Additional garbage error checking '''
             
