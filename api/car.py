@@ -43,7 +43,7 @@ class CarsAPI:
             if car:
                 return jsonify(car.read())
             # failure returns error
-            return {'message': f'Processed {name}, either a format error or User ID {uid} is duplicate'}, 210
+            return {'message': f'Processed {name}, either a format error or User ID is duplicate'}, 210
 
     class _Read(Resource):
         def get(self):
