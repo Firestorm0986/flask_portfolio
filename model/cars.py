@@ -14,10 +14,10 @@ class Cars(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     _name = db.Column(db.String(255), unique=False, nullable=False)
     _car = db.Column(db.String(255), unique=False, nullable=False)
-    _password = db.Column(db.String(255), unique = False, nullable = True)
+    _password = db.Column(db.String(255), unique = False, nullable = False)
     # Defines a relationship between User record and Notes table, one-to-many (one user to many notes)
     # constructor of a User object, initializes the instance variables within object (self)
-    def __init__(self, name, car, id):
+    def __init__(self, name, car, id, password):
         self.id = id
         self._name = name    # variables with self prefix become part of the object, 
         self._car = car
@@ -38,7 +38,7 @@ class Cars(db.Model):
     
     # a setter function, allows name to be updated after initial object creation
     @password.setter
-    def password(self,password):
+    def password(self, password):
         self._password = password
 
     @property
@@ -70,7 +70,7 @@ class Cars(db.Model):
             "id": self.id,
             "name": self.name,
             "car": self.car,
-            "password": self.passwords,
+            "password": self.password,
         }
 
     # CRUD update: updates user name, password, phone
