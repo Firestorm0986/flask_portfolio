@@ -22,6 +22,9 @@ class CarsAPI:
             if name is None or len(name) < 2:
                 return {'message': f'Name is missing, or is less than 2 characters'}, 210
             # validate uid
+            password = body.get('password')
+            if password is None or len(password) < 2:
+                return {'message': f'Name is missing, or is less than 2 characters'}, 210
             car = body.get('car')
             if car is None or len(car) < 2:
                 return {'message': f'User ID is missing, or is less than 2 characters'}, 210
@@ -32,7 +35,7 @@ class CarsAPI:
 
             ''' #1: Key code block, setup USER OBJECT '''
             uo = Cars(name=name, 
-                      car=car, id=id,)
+                      car=car, id=id, password=password)
             
             ''' Additional garbage error checking '''
             

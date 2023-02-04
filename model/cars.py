@@ -14,12 +14,14 @@ class Cars(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     _name = db.Column(db.String(255), unique=False, nullable=False)
     _car = db.Column(db.String(255), unique=False, nullable=False)
+    _password = db.Column(db.String(255), unique = False, nullable = True)
     # Defines a relationship between User record and Notes table, one-to-many (one user to many notes)
     # constructor of a User object, initializes the instance variables within object (self)
     def __init__(self, name, car, id):
         self.id = id
         self._name = name    # variables with self prefix become part of the object, 
         self._car = car
+        self._password = password
 
     @property
     def name(self):
@@ -29,6 +31,15 @@ class Cars(db.Model):
     @name.setter
     def name(self, name):
         self._name = name
+
+    @property
+    def password(self):
+        return self._password
+    
+    # a setter function, allows name to be updated after initial object creation
+    @password.setter
+    def password(self,password):
+        self._password = password
 
     @property
     def car(self):
@@ -59,16 +70,19 @@ class Cars(db.Model):
             "id": self.id,
             "name": self.name,
             "car": self.car,
+            "password": self.passwords,
         }
 
     # CRUD update: updates user name, password, phone
     # returns self
-    def update(self, name="", car=""):
+    def update(self, name="", car="", password =""):
         """only updates values with length"""
         if len(name) > 0:
             self.name = name
         if len(car) > 0:
             self.car = car
+        if len(password) > 0:
+            self.password = password
         db.session.commit()
         return self
 
@@ -84,11 +98,11 @@ def initCars():
     """Create database and tables"""
     db.create_all()
     """Tester data for table"""
-    u1 = Cars(id = 1, name='Thomas Edison', car='Tesla Model y')
-    u2 = Cars(id = 2, name='Nicholas Tesla', car='Pagani')
-    u3 = Cars(id = 3, name='Alexander Graham Bell', car='Ferrari')
-    u4 = Cars(id = 4, name='Eli Whitney', car='Lexus')
-    u5 = Cars(id = 5, name='John Mortensen', car='NIO')
+    u1 = Cars(id = 1, name='Thomas Edison', car='Tesla Model y', password = 'idk')
+    u2 = Cars(id = 2, name='Nicholas Tesla', car='Pagani', password = 'idk')
+    u3 = Cars(id = 3, name='Alexander Graham Bell', car='Ferrari', password = 'idk')
+    u4 = Cars(id = 4, name='Eli Whitney', car='Lexus', password = 'idk')
+    u5 = Cars(id = 5, name='John Mortensen', car='NIO', password = 'idk')
 
     cars = [u1, u2, u3, u4, u5]
 
