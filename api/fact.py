@@ -22,20 +22,14 @@ class FactsAPI:
             if industry is None or len(industry) < 2:
                 return {'message': f'industry is missing, or is less than 2 characters'}, 210
             # validate uid
-            knew = body.get('knew')
-            if knew is None or len(knew) < 2:
-                return {'message': f'industry is missing, or is less than 2 characters'}, 210
             car = body.get('car')
             if car is None or len(car) < 2:
-                return {'message': f'User ID is missing, or is less than 2 characters'}, 210
-            id = body.get('id')
-            if id is None :
                 return {'message': f'User ID is missing, or is less than 2 characters'}, 210
             # look for knew and dob
 
             ''' #1: Key code block, setup USER OBJECT '''
             uo = Facts(industry=industry, 
-                      car=car, id=id, knew=knew)
+                      car=car)
             
             ''' Additional garbage error checking '''
             

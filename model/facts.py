@@ -17,11 +17,10 @@ class Facts(db.Model):
     _knew = db.Column(db.String(255), unique = False, nullable = False)
     # Defines a relationship between User record and Notes table, one-to-many (one user to many notes)
     # constructor of a User object, initializes the instance variables within object (self)
-    def __init__(self, car, industry, id, knew):
-        self.id = id
+    def __init__(self, car, industry):
+
         self._industry = industry   # variables with self prefix become part of the object, 
         self._car = car
-        self._knew = knew
 
     @property
     def industry(self):
@@ -32,14 +31,7 @@ class Facts(db.Model):
     def industry(self, industry):
         self._industry = industry
 
-    @property
-    def knew(self):
-        return self._knew
     
-    # a setter function, allows industry to be updated after initial object creation
-    @knew.setter
-    def knew(self, knew):
-        self._knew = knew
 
     @property
     def car(self):
@@ -70,19 +62,17 @@ class Facts(db.Model):
             "id": self.id,
             "industry": self.industry,
             "car": self.car,
-            "knew": self.knew,
+            
         }
 
     # CRUD update: updates user industry, knew, phone
     # returns self
-    def update(self, industry="", car="", knew = ""):
+    def update(self, industry="", car=""):
         """only updates values with length"""
         if len(industry) > 0:
             self.industry = industry
         if len(car) > 0:
             self.car = car
-        if len(knew) > 0:
-            self.knew = knew
         db.session.commit()
         return self
 
@@ -98,11 +88,11 @@ def initFacts():
     """Create database and tables"""
     db.create_all()
     """Tester data for table"""
-    u1 = Facts(id = 1, industry='Thomas Edison', car='Tesla Model y', knew = 'False')
-    u2 = Facts(id = 2, industry='Nicholas Tesla', car='Pagani', knew = 'False')
-    u3 = Facts(id = 3, industry='Alexander Graham Bell', car='Ferrari', knew = 'False')
-    u4 = Facts(id = 4, industry='Eli Whitney', car='Lexus', knew = 'False')
-    u5 = Facts(id = 5, industry='John Mortensen', car='NIO', knew = 'False')
+    u1 = Facts( industry='Thomas Edison', car='Tesla Model y', )
+    u2 = Facts( industry='Nicholas Tesla', car='Pagani', )
+    u3 = Facts( industry='Alexander Graham Bell', car='Ferrari', )
+    u4 = Facts( industry='Eli Whitney', car='Lexus', )
+    u5 = Facts( industry='John Mortensen', car='NIO', )
 
     facts = [u1, u2, u3, u4, u5]
 
