@@ -85,7 +85,6 @@ class Facts(db.Model):
 """CRUD DONE"""
 
 def initFacts():
-    
 
     """Builds sample user/note(s) data"""
     with app.app_context():
