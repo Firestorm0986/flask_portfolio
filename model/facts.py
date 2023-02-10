@@ -85,23 +85,28 @@ class Facts(db.Model):
 """CRUD DONE"""
 
 def initFacts():
-    """Create database and tables"""
-    db.create_all()
-    """Tester data for table"""
-    u1 = Facts( industry='Thomas Edison', car='Tesla Model y', )
-    u2 = Facts( industry='Nicholas Tesla', car='Pagani', )
-    u3 = Facts( industry='Alexander Graham Bell', car='Ferrari', )
-    u4 = Facts( industry='Eli Whitney', car='Lexus', )
-    u5 = Facts( industry='John Mortensen', car='NIO', )
-
-    facts = [u1, u2, u3, u4, u5]
-
-    for fact in facts:
-        try:
-            fact.create()
-        except IntegrityError:
-            db.session.remove()
-            print(f"Records exist, duplicate email, or error: {fact.id}")
+    
 
     """Builds sample user/note(s) data"""
-    
+    with app.app_context():
+        """Create database and tables"""
+        db.init_app(app)
+        db.create_all()
+        """Tester data for table"""
+        u1 = Facts( industry='Thomas Edison', car='Tesla Model y', )
+        u2 = Facts( industry='Nicholas Tesla', car='Pagani', )
+        u3 = Facts( industry='Alexander Graham Bell', car='Ferrari', )
+        u4 = Facts( industry='Eli Whitney', car='Lexus', )
+        u5 = Facts( industry='John Mortensen', car='NIO', )
+
+        facts = [u1, u2, u3, u4, u5]
+
+        """Builds sample user/note(s) data"""
+        for fact in facts:
+            try:
+                '''add a few 1 to 4 notes per user'''
+                fact.create()
+            except IntegrityError:
+                '''fails with bad or duplicate data'''
+                db.session.remove()
+                print(f"Records exist, duplicate email, or error:")
