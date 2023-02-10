@@ -14,7 +14,7 @@ class Facts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     _car = db.Column(db.String(255), unique=False, nullable=False)
     _industry = db.Column(db.String(255), unique=False, nullable=False)
-    _knew = db.Column(db.String(255), unique = False, nullable = False)
+    
     # Defines a relationship between User record and Notes table, one-to-many (one user to many notes)
     # constructor of a User object, initializes the instance variables within object (self)
     def __init__(self, car, industry):
