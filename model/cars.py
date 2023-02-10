@@ -56,7 +56,7 @@ class Cars(db.Model):
     def create(self):
         try:
             # creates a person object from User(db.Model) class, passes initializers
-            db.session.add(self)  # add prepares to persist person object to Users table
+            db.session.add(self)  # add prepares to persist person object to cars table
             db.session.commit()  # SqlAlchemy "unit of work pattern" requires a manual commit
             return self
         except IntegrityError:
@@ -95,23 +95,28 @@ class Cars(db.Model):
 """CRUD DONE"""
 
 def initCars():
-    """Create database and tables"""
-    db.create_all()
-    """Tester data for table"""
-    u1 = Cars(id = 1, name='Thomas Edison', car='Tesla Model y', password = 'idk')
-    u2 = Cars(id = 2, name='Nicholas Tesla', car='Pagani', password = 'idk')
-    u3 = Cars(id = 3, name='Alexander Graham Bell', car='Ferrari', password = 'idk')
-    u4 = Cars(id = 4, name='Eli Whitney', car='Lexus', password = 'idk')
-    u5 = Cars(id = 5, name='John Mortensen', car='NIO', password = 'idk')
+    with app.app_context():
+        """Create database and tables"""
+        db.init_app(app)
+        db.create_all()
+        """Tester data for table"""
+        u1 = Cars(id = 1, name='Thomas Edison', car='Tesla Model y', password = 'idk')
+        u2 = Cars(id = 2, name='Nicholas Tesla', car='Pagani', password = 'idk')
+        u3 = Cars(id = 3, name='Alexander Graham Bell', car='Ferrari', password = 'idk')
+        u4 = Cars(id = 4, name='Eli Whitney', car='Lexus', password = 'idk')
+        u5 = Cars(id = 5, name='John Mortensen', car='NIO', password = 'idk')
 
-    cars = [u1, u2, u3, u4, u5]
+        cars = [u1, u2, u3, u4, u5]
 
-    for car in cars:
-        try:
-            car.create()
-        except IntegrityError:
-            db.session.remove()
-            print(f"Records exist, duplicate email, or error: {car.id}")
-
-    """Builds sample user/note(s) data"""
+        """Builds sample user/note(s) data"""
+        for car in cars:
+            try:
+                '''add a few 1 to 4 notes per user'''
+                
+                '''add user/post data to table'''
+                car.create()
+            except IntegrityError:
+                '''fails with bad or duplicate data'''
+                db.session.remove()
+                print(f"Records exist, duplicate email, or error: ")
     
