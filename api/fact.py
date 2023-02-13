@@ -17,35 +17,34 @@ class FactsAPI:
             body = request.get_json()
             
             ''' Avoid garbage in, error checking '''
-            # validate industry
-            industry = body.get('industry')
-            if industry is None or len(industry) < 2:
-                return {'message': f'industry is missing, or is less than 2 characters'}, 210
-            # validate uid
+            # validate car
             car = body.get('car')
             if car is None or len(car) < 2:
-                return {'message': f'User ID is missing, or is less than 2 characters'}, 210
-            # look for knew and dob
+                return {'message': f'car is missing, or is less than 2 characters'}, 210
+            # validate uid
+            industry = body.get('industry')
+            if industry is None or len(industry) < 2:
+                return {'message': f'car is missing, or is less than 2 characters'}, 210
+            # look for industry and dob
 
             ''' #1: Key code block, setup USER OBJECT '''
-            uo = Facts(industry=industry, 
-                      car=car)
+            uo = Facts(car=car, industry=industry)
             
             ''' Additional garbage error checking '''
             
             ''' #2: Key Code block to add user to database '''
             # create user in database
-            fact = uo.create()
+            Fact = uo.create()
             # success returns json of user
-            if fact:
-                return jsonify(fact.read())
+            if Fact:
+                return jsonify(Fact.read())
             # failure returns error
-            return {'message': f'Processed {industry}, either a format error or User ID is duplicate'}, 210
+            return {'message': f'Processed {car}, either a format error or User ID is duplicate'}, 210
 
     class _Read(Resource):
         def get(self):
             facts = Facts.query.all()    # read/extract all users from database
-            json_ready = [fact.read() for fact in facts]  # prepare output in json
+            json_ready = [Fact.read() for Fact in facts]  # prepare output in json
             return jsonify(json_ready)  # jsonify creates Flask response object, more specific to APIs than json.dumps
 
     # building RESTapi endpoint

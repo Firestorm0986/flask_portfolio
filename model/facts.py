@@ -8,7 +8,7 @@ from sqlalchemy.exc import IntegrityError
 
 
 class Facts(db.Model):
-    __tableindustry__ = 'facts'  # table industry is plural, class industry is singular
+    __tablename__ = 'facts'  # table industry is plural, class industry is singular
 
     # Define the User schema with "vars" from object
     id = db.Column(db.Integer, primary_key=True)
