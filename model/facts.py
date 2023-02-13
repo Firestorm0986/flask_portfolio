@@ -39,7 +39,7 @@ class Facts(db.Model):
     
     # a setter function, allows industry to be updated after initial object creation
     @car.setter
-    def industry(self, car):
+    def car(self, car):
         self._car = car
 
     def __str__(self):
