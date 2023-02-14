@@ -1,6 +1,6 @@
 flask_login
 flask_sqlalchemy
 flask_migrate
-
+flask_requests
 flask_restful
 flask_cors
