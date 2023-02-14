@@ -1,7 +1,7 @@
 version: '3'
 services:
         web:
-                image: flask_DART_v1
+                image: flask_dart_v1
                 build: .
                 ports:
                         - "8114:8086"
