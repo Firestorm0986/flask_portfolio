@@ -2,10 +2,12 @@ from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_cors import CORS
 # Setup of key Flask object (app)
 app = Flask(__name__)
 # Setup SQLAlchemy object and properties for the database (db)
 
+CORS(app)
 dbURI = 'sqlite:///volumes/sqlite.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = dbURI
