@@ -92,12 +92,12 @@ def initFacts():
         db.init_app(app)
         db.create_all()
         """Tester data for table"""
-        u1 = Facts( industry='Thomas Edison', car='Tesla Model y', )
-        u2 = Facts( industry='Nicholas Tesla', car='Pagani', )
-        u3 = Facts( industry='Alexander Graham Bell', car='Ferrari', )
-        u4 = Facts( industry='Eli Whitney', car='Lexus', )
-        u5 = Facts( industry='John Mortensen', car='NIO', )
-
+        u1 = Facts( industry='Nearly half the EVs in the world are in China.', car='Tesla was originally named after Nikola Tesla, the inventor of alternating current.', )
+        u2 = Facts( industry='Roughly 96 percent of EV owners would buy or lease another one', car='Tesla built its Gigafactory 3 in China to produce the Tesla Model 3 and Tesla Model Y for the Chinese market.', )
+        u3 = Facts( industry='EVs are more efficient. Up to 80 percent of the battery energy powers the vehicle, compared to 14% to 26 percent of the energy from a gasoline-powered car.', car='Nio has innovative battery swap solutions for charging your EV.', )
+        u4 = Facts( industry='Hybrid-Electric Vehicles (HEVs): HEVs combine a gas-powered engine with one (or more) electric motors. An HEV does not plug in; it collects energy through regenerative braking', car='Company name Rivian is inspired from CEO RJ Scaringes time growing up in Florida', )
+        u5 = Facts( industry='Battery Electric Vehicles (BEVs): Also known as an all-electric car, it needs to be plugged in to recharge', car='Lucid air manufacturer Lucid motors was previously called Atieva', )
+    
         facts = [u1, u2, u3, u4, u5]
 
         """Builds sample user/note(s) data"""

@@ -46,6 +46,17 @@ class FactsAPI:
             facts = Facts.query.all()    # read/extract all users from database
             json_ready = [Fact.read() for Fact in facts]  # prepare output in json
             return jsonify(json_ready)  # jsonify creates Flask response object, more specific to APIs than json.dumps
+        
+    class _Delete(Resource):
+        def delete(self):
+            body = request.get_json()
+            id = body.get('id')
+            uo = Facts(id=id)
+            Fact = uo.delete()
+            if Fact:
+                return jsonify(Fact)
+            # failure returns error
+            return {'message': f'Processed {id}, either a format error or User ID is duplicate'}, 210
 
     # building RESTapi endpoint
     api.add_resource(_Create, '/create')
